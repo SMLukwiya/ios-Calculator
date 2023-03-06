@@ -17,5 +17,14 @@ func formatResult(value: Double) -> String {
     numberFormatter.maximumFractionDigits = 16
     let result = numberFormatter.string(from: NSNumber(value: value))
     
-    return result ?? "0 "
+    return result ?? "0"
+}
+
+func lastCharIsDigit(str: String) -> Bool {
+    return "0123456789".contains(getLastChar(str: str))
+}
+
+func lastCharIsOperator(str: String) -> Bool {
+    let lastStr = getLastChar(str: str)
+    return operators.contains(lastStr)
 }

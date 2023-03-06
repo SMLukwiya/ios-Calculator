@@ -74,18 +74,40 @@ struct CalculatorButtonsView: View {
             
         case .equal, .negative:
             print("eq/ng")
+            if !currentComputation.isEmpty {
+                if lastCharIsOperator(str: currentComputation) {
+                    let sign = button == .negative ? -1.0 : 1.0
+                    mainResult = formatResult(value: sign * calculateResults())
+                    
+                    if button == .negative {
+                        currentComputation = mainResult
+                    }
+                }
+            }
         case .decimal:
             print("dec")
         case .percent:
             print("%")
         case .undo:
             print("undo")
-            currentComputation = String(currentComputation.dropLast(    ))
+            currentComputation = String(currentComputation.dropLast())
         case .add, .substract, .divide, .multiply:
             print("ops")
+            if lastCharIsDigit(str: currentComputation) {
+               appendToCurrentComputation(button: button)
+            }
         default:
             print("default")
+            appendToCurrentComputation(button: button)
         }
+    }
+    
+    func appendToCurrentComputation(button: CalculatorButton) {
+        currentComputation += button.rawValue
+    }
+    
+    func calculateResults() -> Double {
+        
     }
 }
 
