@@ -89,13 +89,6 @@
 		6FC511FE29B30B5D009A1EC1 = {
 			isa = PBXGroup;
 			children = (
-				6FC5124129B5B4F1009A1EC1 /* StringHelperFunctions.swift */,
-				6FC5123F29B58F49009A1EC1 /* ButtonView.swift */,
-				6FC5123D29B58A9A009A1EC1 /* Enumerations.swift */,
-				6FC5123B29B581C9009A1EC1 /* CalculatorButtonsView.swift */,
-				6FC5123929B5801C009A1EC1 /* ComputationView.swift */,
-				6FC5123729B57D7D009A1EC1 /* SunMoonView.swift */,
-				6FC5123529B31048009A1EC1 /* ColorConstants.swift */,
 				6FC5120929B30B5D009A1EC1 /* AdaptiveCalculator */,
 				6FC5121B29B30B5E009A1EC1 /* AdaptiveCalculatorTests */,
 				6FC5122529B30B5E009A1EC1 /* AdaptiveCalculatorUITests */,
@@ -116,6 +109,9 @@
 		6FC5120929B30B5D009A1EC1 /* AdaptiveCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				6FC5124529B5E880009A1EC1 /* Helpers */,
+				6FC5124429B5E85A009A1EC1 /* Constants */,
+				6FC5124329B5E810009A1EC1 /* views */,
 				6FC5120A29B30B5D009A1EC1 /* AdaptiveCalculatorApp.swift */,
 				6FC5120C29B30B5D009A1EC1 /* MainCalculatorView.swift */,
 				6FC5120E29B30B5E009A1EC1 /* Assets.xcassets */,
@@ -148,6 +144,34 @@
 				6FC5122829B30B5E009A1EC1 /* AdaptiveCalculatorUITestsLaunchTests.swift */,
 			);
 			path = AdaptiveCalculatorUITests;
+			sourceTree = "<group>";
+		};
+		6FC5124329B5E810009A1EC1 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				6FC5123B29B581C9009A1EC1 /* CalculatorButtonsView.swift */,
+				6FC5123929B5801C009A1EC1 /* ComputationView.swift */,
+				6FC5123729B57D7D009A1EC1 /* SunMoonView.swift */,
+				6FC5123F29B58F49009A1EC1 /* ButtonView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		6FC5124429B5E85A009A1EC1 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				6FC5123529B31048009A1EC1 /* ColorConstants.swift */,
+				6FC5123D29B58A9A009A1EC1 /* Enumerations.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		6FC5124529B5E880009A1EC1 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6FC5124129B5B4F1009A1EC1 /* StringHelperFunctions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

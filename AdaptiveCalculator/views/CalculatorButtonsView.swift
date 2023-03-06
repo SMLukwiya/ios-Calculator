@@ -73,9 +73,8 @@ struct CalculatorButtonsView: View {
             mainResult = "0"
             
         case .equal, .negative:
-            print("eq/ng")
             if !currentComputation.isEmpty {
-                if lastCharIsOperator(str: currentComputation) {
+                if !lastCharIsOperator(str: currentComputation) {
                     let sign = button == .negative ? -1.0 : 1.0
                     mainResult = formatResult(value: sign * calculateResults())
                     
@@ -85,19 +84,36 @@ struct CalculatorButtonsView: View {
                 }
             }
         case .decimal:
-            print("dec")
+            if let lastOccurenceOfDecimalPoint = currentComputation.lastIndex(of: ".") {
+                // 123.37 OR 123.6 + 102
+                let startIndex = currentComputation.index(lastOccurenceOfDecimalPoint, offsetBy: 1)
+                let endIndex = currentComputation.endIndex
+                
+                // substring -> 37 OR 6+102
+                let rightSubString = String(currentComputation[startIndex..<endIndex])
+                
+                // did not find a Int,e.g,37, found instead 6+102, it is valid to append "."
+                if Int(rightSubString) == nil && !rightSubString.isEmpty {
+                    currentComputation += "."
+                }
+            } else {
+                if currentComputation.isEmpty {
+                    currentComputation += "0."
+                } else if lastCharIsDigit(str: currentComputation) {
+                    currentComputation += "."
+                }
+            }
         case .percent:
-            print("%")
+            if lastCharIsDigit(str: currentComputation) {
+                appendToCurrentComputation(button: button)
+            }
         case .undo:
-            print("undo")
             currentComputation = String(currentComputation.dropLast())
         case .add, .substract, .divide, .multiply:
-            print("ops")
-            if lastCharIsDigit(str: currentComputation) {
+            if lastCharIsDigitOrPercent(str: currentComputation) {
                appendToCurrentComputation(button: button)
             }
         default:
-            print("default")
             appendToCurrentComputation(button: button)
         }
     }
@@ -107,7 +123,19 @@ struct CalculatorButtonsView: View {
     }
     
     func calculateResults() -> Double {
+        let visibleComputation: String =    currentComputation
+        var computations = visibleComputation.replacingOccurrences(of: "%", with: "*0.01")
+        computations = computations.replacingOccurrences(of: multiplySymbol, with: "*")
+        computations = computations.replacingOccurrences(of: divideSymbol, with: "/")
         
+        if getLastChar(str: computations) == "." {
+            computations += "0"
+        }
+        
+        // key point, actual computation
+        let expr =  NSExpression(format: computations)
+        let exprValue = expr.expressionValue(with: nil, context: nil) as! Double
+        return exprValue
     }
 }
 

@@ -28,3 +28,7 @@ func lastCharIsOperator(str: String) -> Bool {
     let lastStr = getLastChar(str: str)
     return operators.contains(lastStr)
 }
+
+func lastCharIsDigitOrPercent(str: String) -> Bool {
+    return "0123456789%".contains(getLastChar(str: str))
+}
